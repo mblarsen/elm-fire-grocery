@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Salt",
+      "done": false,
+      "archived": true
+    },
+    {
+      "id": 2,
+      "name": "Skyflakes",
+      "done": false,
+      "archived": true
+    },
+    {
+      "id": 3,
+      "name": "Almonds",
+      "done": false,
+      "archived": false
+    },
+    {
+      "id": 4,
+      "name": "Milk",
+      "done": false,
+      "archived": true
+    },
+    {
+      "id": 5,
+      "name": "Lotus",
+      "done": false,
+      "archived": true
+    },
+    {
+      "id": 6,
+      "name": "Juice",
+      "done": true,
+      "archived": false
+    },
+    {
+      "id": 7,
+      "name": "Seed",
+      "done": false,
+      "archived": true
+    },
+    {
+      "id": 8,
+      "name": "Fransk Hotdog",
+      "done": true,
+      "archived": false
+    },
+    {
+      "id": 9,
+      "name": "Parmasan",
+      "done": false,
+      "archived": false
+    },
+    {
+      "id": 10,
+      "name": "Ostevalle",
+      "done": true,
+      "archived": false
+    }
+  ]
+}
