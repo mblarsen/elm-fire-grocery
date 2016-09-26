@@ -103,9 +103,9 @@ archivedItem : Item -> Html Msg
 archivedItem item =
     div [ class "Item--active" ]
         [ text item.name
-        , button
-            [ class "button is-success"
+        , i
+            [ class "fa fa-plus-circle"
             , onClick (ReuseItem item)
             ]
-            [ text "Add" ]
+            []
         ]
