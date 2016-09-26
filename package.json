@@ -9,15 +9,20 @@
     "watch": "webpack --watch",
     "dev": "webpack-dev-server --port 3000"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mblarsen/elm-fire-grocery.git"
+  },
   "author": "Michael Bøcker-Larsen <mblarsen@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "ace-css": "^1.1.0",
     "bulma": "^0.2.0",
     "css-loader": "^0.25.0",
     "elm-webpack-loader": "^3.0.6",
     "file-loader": "^0.9.0",
     "font-awesome": "^4.6.3",
+    "node-sass": "^3.10.0",
+    "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",

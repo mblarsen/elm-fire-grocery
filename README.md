@@ -11,6 +11,7 @@ Functionality:
 - [X] Marke shopping complete (archive all but save for later reuse)
 - [X] Reuse archived item
 - [X] Persist 
+- [X] Use Sass to build Bulma.io + app css
 - [ ] Style for mobile
 - [ ] Add app icons
 - [ ] Use Firebase
