@@ -23,6 +23,7 @@ Functionality:
 
     elm-package install
     npm install
+    cp db.example.json db.json
 
 ## Build:
 
