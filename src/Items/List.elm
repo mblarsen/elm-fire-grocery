@@ -3,6 +3,7 @@ module Items.List exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onCheck, onInput)
+import Html.Keyed as Keyed
 import Items.Messages exposing (..)
 import Items.Models exposing (Item)
 
@@ -80,17 +81,20 @@ completeSection items =
 
 activeItem : Item -> Html Msg
 activeItem item =
-    div [ class "Item--active" ]
-        [ label []
-            [ input
-                [ type' "checkbox"
-                , id (toString item.id)
-                , checked item.done
-                , onCheck (ToggleItem item)
+    Keyed.node "div"
+        [ class "Item--active" ]
+        [ ( (toString item.id)
+          , label []
+                [ input
+                    [ type' "checkbox"
+                    , id (toString item.id)
+                    , checked item.done
+                    , onCheck (ToggleItem item)
+                    ]
+                    []
+                , text item.name
                 ]
-                []
-            , text item.name
-            ]
+          )
         ]
 
 
