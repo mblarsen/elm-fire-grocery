@@ -19,16 +19,22 @@ Functionality:
 
 # Getting started
 
-Install:
+## Install:
 
     elm-package install
     npm install
 
-Build:
+## Build:
 
     npm run build
 
-Develop
+## Develop
+
+First start the backend/api:
+
+    npm run api &
+
+Then start the webpack dev server:
 
     npm run dev
 
