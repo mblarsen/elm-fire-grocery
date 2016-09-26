@@ -25,8 +25,6 @@ hero =
             [ div [ class "container" ]
                 [ h1 [ class "title" ]
                     [ text "Grocery List" ]
-                , h2 [ class "subtitle" ]
-                    [ text "Don't forget your almonds..." ]
                 ]
             ]
         ]
