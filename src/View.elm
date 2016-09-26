@@ -40,7 +40,7 @@ page model =
 
 dontForget : Html Msg
 dontForget =
-    div []
+    div [ class "section" ]
         [ h1 [] [ text "Don't forget" ]
         , input [ placeholder "Apples?", onInput NameItem ] []
         , button

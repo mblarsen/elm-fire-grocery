@@ -11,11 +11,15 @@ import Items.Models exposing (Item)
 view : List Item -> Html Msg
 view items =
     div []
-        [ (incompleteSection items)
-        , (completeSection items)
-        , (doneShopping items)
-        , h1 [] [ text "Archived" ]
-        , div [] [ (archivedList items) ]
+        [ div [ class "section" ]
+            [ (incompleteSection items)
+            , (completeSection items)
+            , (doneShopping items)
+            ]
+        , div [ class "section" ]
+            [ h1 [] [ text "Common Items" ]
+            , div [] [ (archivedList items) ]
+            ]
         ]
 
 
@@ -54,12 +58,14 @@ incompleteSection items =
                 |> List.map activeItem
 
         headerNode =
-            h1 [] [ text "Get these items" ]
+            -- Needs to be Tuble ( String, Html Msg ) to
+            -- work with Keyed.node "div" below
+            ( "header-get", h1 [] [ text "Get these items" ] )
     in
         if List.isEmpty itemNodes then
-            div [] [ text "Add new items or scroll down to add commonly purchased items." ]
+            p [] [ text "Add new items or scroll down to add commonly purchased items." ]
         else
-            div [] (headerNode :: itemNodes)
+            Keyed.node "div" [] (headerNode :: itemNodes)
 
 
 completeSection : List Item -> Html Msg
@@ -71,20 +77,23 @@ completeSection items =
                 |> List.map activeItem
 
         headerNode =
-            h2 [] [ text "In the basket" ]
+            -- Needs to be Tuble ( String, Html Msg ) to
+            -- work with Keyed.node "div" below
+            ( "header-basket", h2 [] [ text "In the basket" ] )
     in
         if List.isEmpty itemNodes then
-            div [] []
+            text ""
         else
-            div [] (headerNode :: itemNodes)
+            Keyed.node "div" [] (headerNode :: itemNodes)
 
 
-activeItem : Item -> Html Msg
+activeItem : Item -> ( String, Html Msg )
 activeItem item =
-    Keyed.node "div"
+    ( (toString item.id)
+    , div
         [ class "Item--active" ]
-        [ ( (toString item.id)
-          , label []
+        [ p [ class "control" ]
+            [ label [ class "checkbox" ]
                 [ input
                     [ type' "checkbox"
                     , id (toString item.id)
@@ -92,10 +101,12 @@ activeItem item =
                     , onCheck (ToggleItem item)
                     ]
                     []
+                , text " "
                 , text item.name
                 ]
-          )
+            ]
         ]
+    )
 
 
 archivedList : List Item -> Html Msg
@@ -107,6 +118,7 @@ archivedItem : Item -> Html Msg
 archivedItem item =
     div [ class "Item--active" ]
         [ text item.name
+        , text " "
         , i
             [ class "fa fa-plus-circle"
             , onClick (ReuseItem item)
