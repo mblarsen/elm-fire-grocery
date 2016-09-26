@@ -32,7 +32,10 @@ update msg items =
 
 toggleCommand : Item -> Bool -> Cmd Msg
 toggleCommand item toggle =
-    save { item | done = toggle }
+    if toggle then
+        save { item | done = toggle, used = item.used + 1 }
+    else
+        save { item | done = toggle }
 
 
 archiveCommand : List Item -> List (Cmd Msg)

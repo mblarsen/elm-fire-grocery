@@ -29,11 +29,12 @@ collectionDecoder =
 
 itemDecoder : Decode.Decoder Item
 itemDecoder =
-    Decode.object4 Item
+    Decode.object5 Item
         ("id" := Decode.int)
         ("name" := Decode.string)
         ("done" := Decode.bool)
         ("archived" := Decode.bool)
+        ("used" := Decode.int)
 
 
 
@@ -91,5 +92,6 @@ itemEncoded item =
     , ( "name", Encode.string item.name )
     , ( "done", Encode.bool item.done )
     , ( "archived", Encode.bool item.archived )
+    , ( "used", Encode.int item.used )
     ]
         |> Encode.object

@@ -111,7 +111,13 @@ activeItem item =
 
 archivedList : List Item -> Html Msg
 archivedList items =
-    div [] (List.filter (\i -> i.archived == True) items |> List.map archivedItem)
+    div [ class "section" ]
+        (items
+            |> List.filter (\i -> i.archived == True)
+            |> List.sortBy .used
+            |> List.reverse
+            |> List.map archivedItem
+        )
 
 
 archivedItem : Item -> Html Msg

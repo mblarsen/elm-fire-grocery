@@ -10,9 +10,10 @@ type alias Item =
     , name : String
     , done : Bool
     , archived : Bool
+    , used : Int
     }
 
 
 new : Item
 new =
-    Item 0 "" False False
+    Item 0 "" False False 0
