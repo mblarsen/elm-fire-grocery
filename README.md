@@ -23,7 +23,6 @@ Functionality:
 
     elm-package install
     npm install
-    cp db.example.json db.json
 
 ## Build:
 
@@ -31,9 +30,9 @@ Functionality:
 
 ## Develop
 
-First start the backend/api:
+Be sure to configure your firebase database in `config.js`.
 
-    npm run api &
+(TODO: implement above section)
 
 Then start the webpack dev server:
 

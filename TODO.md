@@ -1,0 +1,4 @@
+- [ ] changeList should create the list if it doesn't exist
+- [ ] firebase push
+- [ ] config file - this includes changes to `programWithFlags`
+- [ ] inject config into index.js (or just `require()` it)
