@@ -4,18 +4,19 @@ This is a tiny project with the sole purpose of learning Elm.
 
 Functionality:
 
-- [X] Add new items
-- [X] Persist items
-- [X] Mark as purchased 
-- [X] Unmark again
-- [X] Marke shopping complete (archive all but save for later reuse)
-- [X] Reuse archived item
-- [X] Persist 
-- [X] Use Sass to build Bulma.io + app css
-- [ ] Style for mobile
-- [ ] Add app icons
-- [ ] Use Firebase
-- [ ] Add auth
+- [o] Items
+    - [X] Add
+    - [X] Mark as purchased
+    - [X] Unmark
+    - [X] Mark shopping complete (archive all)
+    - [X] Reuse archived items
+    - [ ] Delete
+- [ ] Lists
+    - [ ] Create
+    - [ ] Switch
+    - [ ] Delete
+- [ ] Hook up to Firebase
+- [ ] Mobile friendly
 
 # Getting started
 
