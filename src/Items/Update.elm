@@ -1,18 +1,15 @@
 module Items.Update exposing (update)
 
 import Items.Messages exposing (Msg(..))
-import Items.Models exposing (Item, ItemId)
+import Items.Models exposing (Item)
 import Items.Commands exposing (save)
 
 
 update : Msg -> List Item -> ( List Item, Cmd Msg )
 update msg items =
     case msg of
-        FetchAllDone newItems ->
+        ItemUpdate newItems ->
             ( newItems, Cmd.none )
-
-        FetchAllFail error ->
-            ( items, Cmd.none )
 
         ReuseItem item ->
             ( items, unarchiveCommand item )
@@ -28,6 +25,13 @@ update msg items =
 
         DoneShopping ->
             ( items, archiveCommand items |> Cmd.batch )
+
+        ErrorOccured err ->
+            let
+                _ =
+                    Debug.log "error" err
+            in
+                ( items, Cmd.none )
 
 
 toggleCommand : Item -> Bool -> Cmd Msg

@@ -2,11 +2,11 @@ module Items.Models exposing (..)
 
 
 type alias ItemId =
-    Int
+    String
 
 
 type alias Item =
-    { id : ItemId
+    { id : Maybe ItemId
     , name : String
     , done : Bool
     , archived : Bool
@@ -16,4 +16,4 @@ type alias Item =
 
 new : Item
 new =
-    Item 0 "" False False 0
+    Item Nothing "" False False 0

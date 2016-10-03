@@ -5,10 +5,10 @@ import Items.Models exposing (Item, ItemId)
 
 
 type Msg
-    = FetchAllDone (List Item)
-    | FetchAllFail Http.Error
+    = ItemUpdate (List Item)
     | ReuseItem Item
     | ToggleItem Item Bool
     | SaveSuccess Item
     | SaveFail Http.Error
     | DoneShopping
+    | ErrorOccured String

@@ -5,6 +5,19 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Grocery List</title>
+        <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBSqMvkaI6zXsd4Za3Kyp4Rmrz0wZPzits",
+            authDomain: "elm-fire-grocery.firebaseapp.com",
+            databaseURL: "https://elm-fire-grocery.firebaseio.com",
+            storageBucket: "elm-fire-grocery.appspot.com",
+            messagingSenderId: "950230376025"
+        };
+        firebase.initializeApp(config);
+        var database = firebase.database();
+        </script>
     </head>
     <body>
         <div id="main"></div>
