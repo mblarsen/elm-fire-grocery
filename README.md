@@ -39,4 +39,14 @@ Then start the webpack dev server:
 
     npm run dev
 
+## Deploy
 
+Be sure to install `firebase-tools`:
+
+    npm install -g firebase-tools
+
+Then when configured:
+
+    firebase deploy
+
+(be sure `npm run build` has been run first so that `dist` has been created)
