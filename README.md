@@ -4,7 +4,7 @@ This is a tiny project with the sole purpose of learning Elm.
 
 Functionality:
 
-- [o] Items
+- [ ] Items
     - [X] Add
     - [X] Mark as purchased
     - [X] Unmark
@@ -31,9 +31,8 @@ Functionality:
 
 ## Develop
 
-Be sure to configure your firebase database in `config.js`.
-
-(TODO: implement above section)
+Be sure to configure your firebase database in `config.js`. Copy
+`config.example.js` to get started.
 
 Then start the webpack dev server:
 
