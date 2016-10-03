@@ -1,4 +1,4 @@
-# Simple Grocery List in Elm
+# Simple Grocery List in Elm and Firebase
 
 This is a tiny project with the sole purpose of learning Elm.
 
