@@ -10,13 +10,22 @@ import Items.Models exposing (Item)
 
 view : List Item -> Html Msg
 view items =
+    -- div []
+    --     [ div [ class "section" ]
+    --         [ (incompleteSection items)
+    --         , (completeSection items)
+    --         , (doneShopping items)
+    --         ]
+    --     , div [ class "section" ]
+    --         [ h1 [] [ text "Common Items" ]
+    --         , div [] [ (archivedList items) ]
+    --         ]
+    --     ]
     div []
-        [ div [ class "section" ]
-            [ (incompleteSection items)
-            , (completeSection items)
-            , (doneShopping items)
-            ]
-        , div [ class "section" ]
+        [ div [ class "section column is-offset-3 is-6" ] [ (incompleteSection items) ]
+        , div [ class "section column is-offset-3 is-6" ] [ (completeSection items) ]
+        , div [ class "section column is-offset-3 is-6" ] [ (doneShopping items) ]
+        , div [ class "section column is-offset-3 is-6" ]
             [ h1 [] [ text "Common Items" ]
             , div [] [ (archivedList items) ]
             ]

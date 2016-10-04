@@ -40,12 +40,12 @@ page model =
 
 dontForget : Model -> Html Msg
 dontForget model =
-    div [ class "section" ]
+    div [ class "section column is-offset-3 is-6" ]
         [ h1 [] [ text "Don't forget" ]
-        , input [ placeholder "Apples?", onInput UpdateName, value model.newItem.name ] []
-        , button
-            [ class "button is-success"
-            , onClick AddNew
+        , div [ class "control is-grouped" ]
+            [ p [ class "control is-expanded" ] [ input [ class "input", placeholder "Apples?", onInput UpdateName, value model.newItem.name ] [] ]
+            , p [ class "control" ]
+                [ button [ class "button is-success", onClick AddNew ] [ text "Add" ]
+                ]
             ]
-            [ text "Add" ]
         ]
