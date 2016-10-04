@@ -26,7 +26,7 @@ view items =
         , div [ class "section column is-offset-3 is-6" ] [ (completeSection items) ]
         , div [ class "section column is-offset-3 is-6" ] [ (doneShopping items) ]
         , div [ class "section column is-offset-3 is-6" ]
-            [ h1 [] [ text "Common Items" ]
+            [ h1 [ class "title is-4" ] [ text "Common Items" ]
             , div [] [ (archivedList items) ]
             ]
         ]
@@ -38,7 +38,7 @@ doneShopping items =
         div [] []
     else
         div []
-            [ button [ class "button is-regular", onClick DoneShopping ] [ text "Done Shopping" ]
+            [ button [ class "button is-primary", onClick DoneShopping ] [ text "Done Shopping" ]
             ]
 
 
@@ -70,7 +70,7 @@ incompleteSection items =
         headerNode =
             -- Needs to be Tuble ( String, Html Msg ) to
             -- work with Keyed.node "div" below
-            ( "header-get", h1 [] [ text "Get these items" ] )
+            ( "header-get", h1 [ class "title is-4" ] [ text "Get this" ] )
     in
         if List.isEmpty itemNodes then
             p [] [ text "Add new items or scroll down to add commonly purchased items." ]
@@ -90,7 +90,7 @@ completeSection items =
         headerNode =
             -- Needs to be Tuble ( String, Html Msg ) to
             -- work with Keyed.node "div" below
-            ( "header-basket", h2 [] [ text "In the basket" ] )
+            ( "header-basket", h2 [ class "title is-5" ] [ text "In the basket" ] )
     in
         if List.isEmpty itemNodes then
             text ""
@@ -145,12 +145,7 @@ sortOrder a b =
 
 archivedItem : Item -> Html Msg
 archivedItem item =
-    div [ class "Item--active" ]
-        [ text item.name
-        , text " "
-        , i
-            [ class "fa fa-plus-circle"
-            , onClick (ReuseItem item)
-            ]
-            []
+    div [ class "Item--archived", onClick (ReuseItem item) ]
+        [ span [ class "icon" ] [ i [ class "fa fa-plus-circle" ] [] ]
+        , text item.name
         ]
