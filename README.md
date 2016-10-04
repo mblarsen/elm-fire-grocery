@@ -15,7 +15,7 @@ Functionality:
     - [ ] Create
     - [ ] Switch
     - [ ] Delete
-- [ ] Hook up to Firebase
+- [X] Hook up to Firebase
 - [ ] Mobile friendly
 
 # Getting started

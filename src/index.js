@@ -15,18 +15,24 @@ var Elm = require('./Main.elm')
 var mountNode = document.getElementById('main')
 var app = Elm.Main.embed(mountNode)
 
-// Setup ports
+// Get values from Firebase
 var listRef = null
 app.ports.changeList.subscribe(function (list) {
-    if (listRef) {
-        listRef.off()
-    }
-    database.ref('list/' + list + '/').on('value', function (snapshot) {
-        console.log(snapshot.val())
+    if (listRef) listRef.off()
+    listRef = database.ref('list/' + list + '/')
+    listRef.on('value', function (snapshot) {
         app.ports.listItems.send(snapshot.val())
     })
 });
 
-// app.ports.storeItem.subscribe(function (item) {
-//     console.log(item)
-// })
+// Push change to Firebase
+app.ports.fbPush.subscribe(function (item) {
+    item = JSON.parse(item)
+    var id = item.id
+    delete item.id
+    if (id === "") {
+        listRef.push(item)
+    } else {
+        listRef.child(id).set(item)
+    }
+})

@@ -6,6 +6,6 @@ import Json.Encode as Encode
 
 type Msg
     = ItemsMsg Items.Messages.Msg
-    | NameItem String
     | AddNew
+    | UpdateName String
     | GotListItems Encode.Value

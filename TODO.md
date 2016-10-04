@@ -1,6 +1,6 @@
 - [ ] changeList should create the list if it doesn't exist
-- [ ] firebase push
-- [ ] config file - this includes changes to `programWithFlags`
-- [ ] inject config into index.js (or just `require()` it)
 - [ ] Add app icons
 - [ ] Add auth
+- [X] firebase push
+- [X] config file
+- [X] inject config into index.js (or just `require()` it)

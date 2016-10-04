@@ -2,7 +2,7 @@ module View exposing (..)
 
 import Html exposing (..)
 import Html.App
-import Html.Attributes exposing (class, placeholder)
+import Html.Attributes exposing (class, placeholder, value)
 import Html.Events exposing (onInput, onClick)
 import Messages exposing (Msg(..))
 import Models exposing (Model)
@@ -33,16 +33,16 @@ hero =
 page : Model -> Html Msg
 page model =
     div [ class "container" ]
-        [ dontForget
+        [ dontForget model
         , Html.App.map ItemsMsg (Items.List.view model.items)
         ]
 
 
-dontForget : Html Msg
-dontForget =
+dontForget : Model -> Html Msg
+dontForget model =
     div [ class "section" ]
         [ h1 [] [ text "Don't forget" ]
-        , input [ placeholder "Apples?", onInput NameItem ] []
+        , input [ placeholder "Apples?", onInput UpdateName, value model.newItem.name ] []
         , button
             [ class "button is-success"
             , onClick AddNew

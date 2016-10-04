@@ -5,23 +5,15 @@ import Messages exposing (Msg(..))
 import Models exposing (Model, initModel)
 import View exposing (view)
 import Update exposing (update)
-
-
--- import Items.Commands exposing (fetchAll)
-
 import Json.Encode as Encode
 
 
 init : ( Model, Cmd Msg )
 init =
-    -- ( initModel, Cmd.map ItemsMsg fetchAll )
     ( initModel, changeList "jensen-larsen" )
 
 
 port changeList : String -> Cmd msg
-
-
--- port storeItem : String -> Cmd msg
 
 
 port listItems : (Encode.Value -> msg) -> Sub msg

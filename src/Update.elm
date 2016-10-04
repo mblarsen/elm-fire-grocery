@@ -4,13 +4,13 @@ import Messages exposing (Msg(..))
 import Models exposing (Model)
 import Items.Update
 import Items.Models exposing (Item, new)
-import Items.Commands exposing (save, receive)
+import Items.Commands exposing (persist, receive)
 import Json.Encode
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case Debug.log "update" msg of
+    case msg of
         ItemsMsg subMsg ->
             let
                 ( updatedItems, cmd ) =
@@ -18,21 +18,22 @@ update msg model =
             in
                 ( { model | items = updatedItems }, Cmd.map ItemsMsg cmd )
 
-        NameItem newName ->
-            ( { model | newItem = (updateName newName model.newItem) }, Cmd.none )
+        UpdateName newName ->
+            let
+                newItem =
+                    model.newItem
+
+                newNewItem =
+                    { newItem | name = newName }
+            in
+                ( { model | newItem = newNewItem }, Cmd.none )
 
         AddNew ->
-            ( resetNewItem model, Cmd.map ItemsMsg (save model.newItem) )
+            let
+                newItem =
+                    model.newItem
+            in
+                ( { model | newItem = new }, Cmd.map ItemsMsg (persist newItem) )
 
         GotListItems json ->
             ( model, Cmd.map ItemsMsg (receive json) )
-
-
-updateName : String -> Item -> Item
-updateName newName item =
-    { item | name = newName }
-
-
-resetNewItem : Model -> Model
-resetNewItem model =
-    { model | newItem = new }

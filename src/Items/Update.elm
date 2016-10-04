@@ -2,7 +2,7 @@ module Items.Update exposing (update)
 
 import Items.Messages exposing (Msg(..))
 import Items.Models exposing (Item)
-import Items.Commands exposing (save)
+import Items.Commands exposing (persist)
 
 
 update : Msg -> List Item -> ( List Item, Cmd Msg )
@@ -37,9 +37,9 @@ update msg items =
 toggleCommand : Item -> Bool -> Cmd Msg
 toggleCommand item toggle =
     if toggle then
-        save { item | done = toggle, used = item.used + 1 }
+        persist { item | done = toggle, used = item.used + 1 }
     else
-        save { item | done = toggle }
+        persist { item | done = toggle }
 
 
 archiveCommand : List Item -> List (Cmd Msg)
@@ -47,7 +47,7 @@ archiveCommand items =
     let
         commandForItem item =
             if item.archived == False then
-                save { item | archived = True, done = False }
+                persist { item | archived = True, done = False }
             else
                 Cmd.none
     in
@@ -56,7 +56,7 @@ archiveCommand items =
 
 unarchiveCommand : Item -> Cmd Msg
 unarchiveCommand item =
-    save { item | archived = False }
+    persist { item | archived = False }
 
 
 updateItems : Item -> List Item -> List Item

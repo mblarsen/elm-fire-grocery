@@ -1,15 +1,15 @@
-module Items.Commands exposing (..)
+port module Items.Commands exposing (..)
 
 import Http exposing (Body)
 import Json.Decode as Decode exposing ((:=))
 import Json.Encode as Encode
 import Task
-import Items.Models exposing (ItemId, Item)
+import Items.Models exposing (Item)
 import Items.Messages exposing (..)
 import Dict
 
 
-{- Receives a JSON value and turns it into either ItemUpdate or ErrorOccured -}
+port fbPush : String -> Cmd msg
 
 
 receive : Encode.Value -> Cmd Msg
@@ -27,7 +27,7 @@ receive json =
                 Err err ->
                     []
     in
-        Task.perform ItemUpdate ItemUpdate (Task.succeed mappedItems)
+        Task.perform identity ItemUpdate (Task.succeed mappedItems)
 
 
 includeUniqueId : ( String, Item ) -> Item
@@ -45,66 +45,28 @@ itemDecoder =
         ("used" := Decode.int)
 
 
-
--- SAVE AND ENCODE
--- TODO update
-
-
-save : Item -> Cmd Msg
-save item =
-    Cmd.none
+persist : Item -> Cmd Msg
+persist item =
+    itemEncoded item
+        |> Encode.encode 0
+        |> fbPush
 
 
+itemEncoded : Item -> Encode.Value
+itemEncoded item =
+    let
+        id =
+            case item.id of
+                Just itemId ->
+                    itemId
 
--- saveTask item
---     |> Task.perform SaveFail SaveSuccess
--- TODO update
--- saveUrl : ItemId -> String
--- saveUrl id =
---     let
---         baseUrl =
---             "https://groceries.codeboutique.com/items/"
---     in
---         if id == 0 then
---             baseUrl
---         else
---             baseUrl ++ (toString id)
--- saveMethod : ItemId -> String
--- saveMethod id =
---     if id == 0 then
---         "POST"
---     else
---         "PUT"
--- TODO update
--- saveTask : Item -> Task.Task Http.Error Item
--- saveTask item =
---     let
---         body =
---             itemEncoded item
---                 |> Encode.encode 0
---                 |> Http.string
---
---         config =
---             { verb = saveMethod item.id
---             , headers = [ ( "Content-Type", "application/json" ) ]
---             , url = saveUrl item.id
---             , body = body
---             }
---     in
---         Http.send Http.defaultSettings config
---             |> Http.fromJson itemDecoder
--- itemEncoded : Item -> Encode.Value
--- itemEncoded item =
---     let
---         id = case item.id of
---             Just itemId ->
---                 item.id
---
---
---     [ ( "id", Encode.string item.id )
---     , ( "name", Encode.string item.name )
---     , ( "done", Encode.bool item.done )
---     , ( "archived", Encode.bool item.archived )
---     , ( "used", Encode.int item.used )
---     ]
---         |> Encode.object
+                Nothing ->
+                    ""
+    in
+        [ ( "id", Encode.string id )
+        , ( "name", Encode.string item.name )
+        , ( "done", Encode.bool item.done )
+        , ( "archived", Encode.bool item.archived )
+        , ( "used", Encode.int item.used )
+        ]
+            |> Encode.object
