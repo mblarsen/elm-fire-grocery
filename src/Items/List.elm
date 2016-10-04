@@ -55,6 +55,7 @@ incompleteSection items =
         itemNodes =
             items
                 |> incomplete
+                |> List.sortBy .name
                 |> List.map activeItem
 
         headerNode =
@@ -74,6 +75,7 @@ completeSection items =
         itemNodes =
             items
                 |> complete
+                |> List.sortBy .name
                 |> List.map activeItem
 
         headerNode =
@@ -114,10 +116,22 @@ archivedList items =
     div [ class "section" ]
         (items
             |> List.filter (\i -> i.archived == True)
-            |> List.sortBy .used
-            |> List.reverse
+            |> List.sortWith sortOrder
             |> List.map archivedItem
         )
+
+
+sortOrder : Item -> Item -> Order
+sortOrder a b =
+    case compare a.used b.used of
+        LT ->
+            GT
+
+        GT ->
+            LT
+
+        EQ ->
+            compare a.name b.name
 
 
 archivedItem : Item -> Html Msg
