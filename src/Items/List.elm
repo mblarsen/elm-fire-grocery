@@ -5,7 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onCheck, onInput)
 import Html.Keyed as Keyed
 import Items.Messages exposing (..)
-import Items.Models exposing (Item)
+import Items.Models exposing (Item, ItemId)
 
 
 view : List Item -> Html Msg
@@ -138,4 +138,15 @@ archivedItem item =
     div [ class "Item--archived", onClick (ReuseItem item) ]
         [ span [ class "icon" ] [ i [ class "fa fa-plus-circle" ] [] ]
         , text item.name
+        , span [ class "icon is-small remove", onClick (DeleteItem (getItemId item)) ] [ i [ class "fa fa-times" ] [] ]
         ]
+
+
+getItemId : Item -> ItemId
+getItemId item =
+    case item.id of
+        Just id ->
+            id
+
+        Nothing ->
+            ""

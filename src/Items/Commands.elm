@@ -4,12 +4,15 @@ import Http exposing (Body)
 import Json.Decode as Decode exposing ((:=))
 import Json.Encode as Encode
 import Task
-import Items.Models exposing (Item)
+import Items.Models exposing (Item, ItemId)
 import Items.Messages exposing (..)
 import Dict
 
 
 port fbPush : Item -> Cmd msg
+
+
+port fbRemove : ItemId -> Cmd msg
 
 
 receive : Encode.Value -> Cmd Msg

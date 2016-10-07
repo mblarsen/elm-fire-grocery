@@ -36,3 +36,7 @@ app.ports.fbPush.subscribe(function (item) {
         listRef.child(id).set(item)
     }
 })
+// Remove item
+app.ports.fbRemove.subscribe(function (id) {
+    listRef.child(id).remove()
+})

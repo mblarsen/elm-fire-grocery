@@ -9,6 +9,7 @@ type Msg
     | ReuseItem Item
     | ToggleItem Item Bool
     | RemoveItem Item
+    | DeleteItem ItemId
     | SaveSuccess Item
     | SaveFail Http.Error
     | DoneShopping

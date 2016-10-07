@@ -2,7 +2,7 @@ module Items.Update exposing (update)
 
 import Items.Messages exposing (Msg(..))
 import Items.Models exposing (Item)
-import Items.Commands exposing (persist)
+import Items.Commands exposing (persist, fbRemove)
 
 
 update : Msg -> List Item -> ( List Item, Cmd Msg )
@@ -19,6 +19,9 @@ update msg items =
 
         RemoveItem item ->
             ( items, removeCommand item )
+
+        DeleteItem id ->
+            ( items, fbRemove id )
 
         SaveSuccess item ->
             ( updateItems item items, Cmd.none )

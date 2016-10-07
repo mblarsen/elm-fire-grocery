@@ -4,10 +4,12 @@
 .Item--archived
   cursor: pointer
 
-.Item--active .icon
+.Item--active .icon,
+.Item--archived .icon.remove
   display: none
   cursor: pointer
   transition: display 0.5s
 
-.Item--active:hover .icon
+.Item--active:hover .icon,
+.Item--archived:hover .icon.remove
   display: inline-block
