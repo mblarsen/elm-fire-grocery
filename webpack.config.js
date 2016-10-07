@@ -1,4 +1,5 @@
-var path = require("path");
+var path = require("path")
+var CopyPlugin = require("copy-webpack-plugin")
 
 module.exports = {
   entry: {
@@ -6,6 +7,15 @@ module.exports = {
       './src/index.js'
     ]
   },
+
+    plugins: [
+        new CopyPlugin([
+            {
+                context: "src/",
+                from: "*.png",
+            }
+        ])
+    ],
 
   output: {
     path: path.resolve(__dirname + '/dist'),
