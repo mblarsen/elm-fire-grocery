@@ -47,10 +47,7 @@ removeCommand item =
 
 toggleCommand : Item -> Bool -> Cmd Msg
 toggleCommand item toggle =
-    if toggle then
-        persist { item | done = toggle, used = item.used + 1 }
-    else
-        persist { item | done = toggle }
+    persist { item | done = toggle }
 
 
 archiveCommand : List Item -> List (Cmd Msg)
@@ -58,7 +55,12 @@ archiveCommand items =
     let
         commandForItem item =
             if item.archived == False then
-                persist { item | archived = True, done = False }
+                case item.done of
+                    False ->
+                        persist { item | archived = True, done = False }
+
+                    True ->
+                        persist { item | archived = True, done = False, used = item.used + 1 }
             else
                 Cmd.none
     in
