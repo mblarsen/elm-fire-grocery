@@ -137,7 +137,7 @@ archivedItem : Item -> Html Msg
 archivedItem item =
     div [ class "Item--archived", onClick (ReuseItem item) ]
         [ span [ class "icon" ] [ i [ class "fa fa-plus-circle" ] [] ]
-        , text item.name
+        , text (item.name ++ " (" ++ (toString item.used) ++ ")")
         , span [ class "icon is-small remove", onClick (DeleteItem (getItemId item)) ] [ i [ class "fa fa-times" ] [] ]
         ]
 
