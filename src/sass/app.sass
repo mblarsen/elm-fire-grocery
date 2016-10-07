@@ -1,3 +1,11 @@
+
+.hero:hover .icon 
+  position: relative
+  animation: skip-cart 2s
+  animation-iteration-count: 1
+  animation-delay: .2s
+  animation-timing-function: ease-in;
+
 .section 
   padding: 15px 20px
 
@@ -13,3 +21,20 @@
 .Item--active:hover .icon,
 .Item--archived:hover .icon.remove
   display: inline-block
+
+@keyframes skip-cart
+  0%
+    left: 0px;
+    color: rgba(255, 255, 255, 1.0)
+  2%
+    left: 2px;
+  4%
+    left: -2px;
+  6%
+    left: 2px;
+  8%
+    left: -2px;
+  100%
+    left: 200px;
+    color: rgba(255, 255, 255, 0.0)
+
