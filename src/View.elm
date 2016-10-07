@@ -24,7 +24,9 @@ hero =
         [ div [ class "hero-body" ]
             [ div [ class "container" ]
                 [ h1 [ class "title" ]
-                    [ text "Grocery List" ]
+                    [ text "Grocery List"
+                    , span [ class "icon is-medium" ] [ i [ class "fa fa-shopping-cart" ] [] ]
+                    ]
                 ]
             ]
         ]

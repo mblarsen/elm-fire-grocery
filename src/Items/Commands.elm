@@ -9,7 +9,7 @@ import Items.Messages exposing (..)
 import Dict
 
 
-port fbPush : String -> Cmd msg
+port fbPush : Item -> Cmd msg
 
 
 receive : Encode.Value -> Cmd Msg
@@ -47,9 +47,7 @@ itemDecoder =
 
 persist : Item -> Cmd Msg
 persist item =
-    itemEncoded item
-        |> Encode.encode 0
-        |> fbPush
+    fbPush item
 
 
 itemEncoded : Item -> Encode.Value

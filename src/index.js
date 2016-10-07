@@ -28,10 +28,9 @@ app.ports.changeList.subscribe(function (list) {
 
 // Push change to Firebase
 app.ports.fbPush.subscribe(function (item) {
-    item = JSON.parse(item)
     var id = item.id
     delete item.id
-    if (id === "") {
+    if (id === null) {
         listRef.push(item)
     } else {
         listRef.child(id).set(item)
