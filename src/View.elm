@@ -20,7 +20,7 @@ view model =
 
 hero : Html Msg
 hero =
-    section [ class "hero is-warning" ]
+    section [ class "hero is-info is-bold" ]
         [ div [ class "hero-body" ]
             [ div [ class "container" ]
                 [ h1 [ class "title" ]
