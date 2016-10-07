@@ -17,6 +17,9 @@ update msg items =
         ToggleItem item toggle ->
             ( items, toggleCommand item (not item.done) )
 
+        RemoveItem item ->
+            ( items, removeCommand item )
+
         SaveSuccess item ->
             ( updateItems item items, Cmd.none )
 
@@ -32,6 +35,11 @@ update msg items =
                     Debug.log "error" err
             in
                 ( items, Cmd.none )
+
+
+removeCommand : Item -> Cmd Msg
+removeCommand item =
+    persist { item | done = False, archived = True }
 
 
 toggleCommand : Item -> Bool -> Cmd Msg

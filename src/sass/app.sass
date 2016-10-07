@@ -3,3 +3,11 @@
 
 .Item--archived
   cursor: pointer
+
+.Item--active .icon
+  display: none
+  cursor: pointer
+  transition: display 0.5s
+
+.Item--active:hover .icon
+  display: inline-block

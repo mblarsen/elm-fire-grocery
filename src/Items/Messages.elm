@@ -8,6 +8,7 @@ type Msg
     = ItemUpdate (List Item)
     | ReuseItem Item
     | ToggleItem Item Bool
+    | RemoveItem Item
     | SaveSuccess Item
     | SaveFail Http.Error
     | DoneShopping
