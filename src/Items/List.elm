@@ -24,33 +24,48 @@ view items =
 doneShopping : List Item -> Html Msg
 doneShopping items =
     if items |> isActive |> List.isEmpty then
-        div [] []
+        text ""
     else
         div []
+            ((showRemoveComplete items)
+                ++ [ button
+                        [ class "button is-primary", onClick DoneShopping ]
+                        [ text "Done Shopping" ]
+                   ]
+            )
+
+
+showRemoveComplete : List Item -> List (Html Msg)
+showRemoveComplete items =
+    case items |> complete |> List.isEmpty of
+        True ->
+            []
+
+        False ->
             [ button
                 [ class "button is-primary", onClick ArchiveSelected ]
                 [ text "Remove Completed" ]
             , text " "
-            , button
-                [ class "button is-primary", onClick DoneShopping ]
-                [ text "Done Shopping" ]
             ]
 
 
 isActive : List Item -> List Item
 isActive items =
-    items
-        |> List.filter (not << .archived)
+    items |> List.filter (not << .archived)
 
 
 incomplete : List Item -> List Item
 incomplete items =
-    items |> isActive |> List.filter (not << .done)
+    items
+        |> isActive
+        |> List.filter (not << .done)
 
 
 complete : List Item -> List Item
 complete items =
-    items |> isActive |> List.filter .done
+    items
+        |> isActive
+        |> List.filter .done
 
 
 incompleteSection : List Item -> Html Msg

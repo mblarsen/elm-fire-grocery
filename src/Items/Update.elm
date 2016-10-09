@@ -35,7 +35,7 @@ update msg items =
         ArchiveSelected ->
             ( items
             , items
-                |> List.filter (\i -> i.done == True)
+                |> List.filter .done
                 |> archiveCommand
                 |> Cmd.batch
             )
