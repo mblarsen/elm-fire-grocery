@@ -121,8 +121,10 @@ archivedList items =
     div [ class "section" ]
         (items
             |> List.filter (\i -> i.archived == True)
-            |> List.sortWith sortOrder
-            |> List.map archivedItem
+            |> List.sortBy .name
+            -- |> List.sortWith sortOrder
+            |>
+                List.map archivedItem
         )
 
 
