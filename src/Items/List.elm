@@ -27,7 +27,13 @@ doneShopping items =
         div [] []
     else
         div []
-            [ button [ class "button is-primary", onClick DoneShopping ] [ text "Done Shopping" ]
+            [ button
+                [ class "button is-primary", onClick ArchiveSelected ]
+                [ text "Remove Completed" ]
+            , text " "
+            , button
+                [ class "button is-primary", onClick DoneShopping ]
+                [ text "Done Shopping" ]
             ]
 
 

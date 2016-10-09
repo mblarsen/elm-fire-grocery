@@ -13,4 +13,5 @@ type Msg
     | SaveSuccess Item
     | SaveFail Http.Error
     | DoneShopping
+    | ArchiveSelected
     | ErrorOccured String

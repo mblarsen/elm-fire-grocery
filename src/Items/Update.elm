@@ -32,6 +32,14 @@ update msg items =
         DoneShopping ->
             ( items, archiveCommand items |> Cmd.batch )
 
+        ArchiveSelected ->
+            ( items
+            , items
+                |> List.filter (\i -> i.done == True)
+                |> archiveCommand
+                |> Cmd.batch
+            )
+
         ErrorOccured err ->
             let
                 _ =

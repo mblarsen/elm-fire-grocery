@@ -44,7 +44,7 @@ dontForget : Model -> Html Msg
 dontForget model =
     div [ class "section column is-offset-3 is-6" ]
         [ div [ class "control is-grouped" ]
-            [ p [ class "control is-expanded" ] [ input [ class "input", placeholder "Add new item, or choose from below...", onInput UpdateName, value model.newItem.name ] [] ]
+            [ p [ class "control is-expanded" ] [ input [ class "input", placeholder "Enter a new item, or choose commonly bought below...", onInput UpdateName, value model.newItem.name ] [] ]
             , p [ class "control" ]
                 [ button [ class "button is-primary", onClick AddNew ] [ text "Add" ]
                 ]
