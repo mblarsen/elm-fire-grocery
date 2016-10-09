@@ -1,6 +1,5 @@
 'use strict';
 
-require('bulma/bulma.sass')
 require('./sass/app.sass')
 require('font-awesome/css/font-awesome.css')
 

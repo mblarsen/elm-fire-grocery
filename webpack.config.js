@@ -29,7 +29,7 @@ module.exports = {
         loaders: [
           'style-loader',
           'css-loader',
-          'sass-loader',
+          'sass-loader?includePaths[]='+ path.resolve(__dirname, 'node_modules/bulma'),
         ]
       },
       {
