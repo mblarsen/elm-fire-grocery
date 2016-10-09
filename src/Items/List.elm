@@ -10,33 +10,54 @@ import Items.Models exposing (Item, ItemId)
 
 view : List Item -> Html Msg
 view items =
-    div []
-        [ div [ class "section column is-offset-3 is-6" ] [ (incompleteSection items) ]
-        , div [ class "section column is-offset-3 is-6" ] [ (completeSection items) ]
-        , div [ class "section column is-offset-3 is-6" ] [ (doneShopping items) ]
-        , div [ class "section column is-offset-3 is-6" ]
-            [ h1 [ class "title is-4" ] [ text "Common Items" ]
-            , div [] [ (archivedList items) ]
+    let
+        wrapSection =
+            wrapMaybe "section column is-offset-3 is-6"
+
+        wrapListSection =
+            wrapListMaybe "section column is-offset-3 is-6"
+    in
+        div []
+            [ wrapSection <| incompleteSection items
+            , wrapSection <| completeSection items
+            , wrapListSection <| doneShopping items
+            , wrapListSection <| commonItemsSection items
             ]
-        ]
 
 
-doneShopping : List Item -> Html Msg
+wrapMaybe : String -> Maybe (Html Msg) -> Html Msg
+wrapMaybe classes maybeNode =
+    case maybeNode of
+        Nothing ->
+            text ""
+
+        Just node ->
+            div [ class classes ] [ node ]
+
+
+wrapListMaybe : String -> Maybe (List (Html Msg)) -> Html Msg
+wrapListMaybe classes maybeList =
+    case maybeList of
+        Nothing ->
+            text ""
+
+        Just elements ->
+            div [ class classes ] elements
+
+
+doneShopping : List Item -> Maybe (List (Html Msg))
 doneShopping items =
     if items |> isActive |> List.isEmpty then
-        text ""
+        Nothing
     else
-        div []
-            ((showRemoveComplete items)
-                ++ [ button
-                        [ class "button is-primary", onClick DoneShopping ]
-                        [ text "Done Shopping" ]
-                   ]
+        Just
+            ((clearCompletedButton items)
+                ++ [ button [ class "button is-link", onClick DoneShopping ] [ text "Clear All" ] ]
             )
 
 
-showRemoveComplete : List Item -> List (Html Msg)
-showRemoveComplete items =
+clearCompletedButton : List Item -> List (Html Msg)
+clearCompletedButton items =
     case items |> complete |> List.isEmpty of
         True ->
             []
@@ -44,7 +65,7 @@ showRemoveComplete items =
         False ->
             [ button
                 [ class "button is-primary", onClick ArchiveSelected ]
-                [ text "Remove Completed" ]
+                [ text "Clear Completed" ]
             , text " "
             ]
 
@@ -68,7 +89,7 @@ complete items =
         |> List.filter .done
 
 
-incompleteSection : List Item -> Html Msg
+incompleteSection : List Item -> Maybe (Html Msg)
 incompleteSection items =
     let
         itemNodes =
@@ -78,17 +99,15 @@ incompleteSection items =
                 |> List.map activeItem
 
         headerNode =
-            -- Needs to be Tuble ( String, Html Msg ) to
-            -- work with Keyed.node "div" below
-            ( "header-get", h1 [ class "title is-4" ] [ text "Get this" ] )
+            h1 [ class "title is-4" ] [ text "We Need" ]
     in
         if List.isEmpty itemNodes then
-            p [] [ text "Add new items or scroll down to add commonly purchased items." ]
+            Just <| p [] [ text "Add new items or scroll down to add commonly purchased items." ]
         else
-            Keyed.node "div" [] (headerNode :: itemNodes)
+            Just <| Keyed.node "div" [] (( "", headerNode ) :: itemNodes)
 
 
-completeSection : List Item -> Html Msg
+completeSection : List Item -> Maybe (Html Msg)
 completeSection items =
     let
         itemNodes =
@@ -98,14 +117,12 @@ completeSection items =
                 |> List.map activeItem
 
         headerNode =
-            -- Needs to be Tuble ( String, Html Msg ) to
-            -- work with Keyed.node "div" below
-            ( "header-basket", h2 [ class "title is-5" ] [ text "In the basket" ] )
+            h2 [ class "title is-6" ] [ text "Bought" ]
     in
         if List.isEmpty itemNodes then
-            text ""
+            Nothing
         else
-            Keyed.node "div" [] (headerNode :: itemNodes)
+            Just <| Keyed.node "div" [] (( "", headerNode ) :: itemNodes)
 
 
 activeItem : Item -> ( String, Html Msg )
@@ -129,6 +146,14 @@ activeItem item =
             ]
         ]
     )
+
+
+commonItemsSection : List Item -> Maybe (List (Html Msg))
+commonItemsSection items =
+    Just
+        [ h1 [ class "title is-4" ] [ text "Common Items" ]
+        , div [] [ (archivedList items) ]
+        ]
 
 
 archivedList : List Item -> Html Msg
