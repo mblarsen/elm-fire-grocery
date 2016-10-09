@@ -11,6 +11,9 @@ import Json.Encode
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        NoOp ->
+            model ! []
+
         ItemsMsg subMsg ->
             let
                 ( updatedItems, cmd ) =
