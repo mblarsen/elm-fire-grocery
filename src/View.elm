@@ -48,7 +48,7 @@ dontForget model =
             [ p [ class "control is-expanded" ]
                 [ input
                     [ class "input"
-                    , placeholder "Enter a new item, or choose commonly bought below..."
+                    , placeholder "Add a new item, or choose an item from below ..."
                     , onEnter AddNew
                     , onInput UpdateName
                     , value model.newItem.name
