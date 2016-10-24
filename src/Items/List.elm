@@ -52,7 +52,7 @@ doneShopping items =
     else
         Just
             ((clearCompletedButton items)
-                ++ [ button [ class "button is-link", onClick DoneShopping ] [ text "Clear All" ] ]
+                ++ [ button [ class "button is-link", onClick DoneShopping ] [ text "Clear all" ] ]
             )
 
 
@@ -65,7 +65,7 @@ clearCompletedButton items =
         False ->
             [ button
                 [ class "button is-primary", onClick ArchiveSelected ]
-                [ text "Clear Completed" ]
+                [ text "Clear bought" ]
             , text " "
             ]
 
@@ -99,7 +99,7 @@ incompleteSection items =
                 |> List.map activeItem
 
         headerNode =
-            h1 [ class "title is-4" ] [ text "We Need" ]
+            h1 [ class "title is-4" ] [ text "We need" ]
     in
         if List.isEmpty itemNodes then
             Just <| p [] [ text "Add new items or scroll down to add commonly purchased items." ]
@@ -151,7 +151,7 @@ activeItem item =
 commonItemsSection : List Item -> Maybe (List (Html Msg))
 commonItemsSection items =
     Just
-        [ h1 [ class "title is-4" ] [ text "Common Items" ]
+        [ h1 [ class "title is-4" ] [ text "Common items" ]
         , div [] (archivedList items)
         ]
 

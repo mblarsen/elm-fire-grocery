@@ -2,6 +2,8 @@
 
 This is a tiny project with the sole purpose of learning Elm.
 
+Working demo: https://groceries.codeboutique.com
+
 Functionality:
 
 - [ ] Items
@@ -10,7 +12,7 @@ Functionality:
     - [X] Unmark
     - [X] Mark shopping complete (archive all)
     - [X] Reuse archived items
-    - [ ] Delete
+    - [X] Delete
 - [ ] Lists
     - [ ] Create
     - [ ] Switch
