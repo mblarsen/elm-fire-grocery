@@ -8,9 +8,13 @@ import Update exposing (update)
 import Json.Encode as Encode
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( initModel, changeList "jensen-larsen" )
+type alias Flags =
+    { list : String }
+
+
+init : Flags -> ( Model, Cmd Msg )
+init flags =
+    ( initModel, changeList flags.list )
 
 
 port changeList : String -> Cmd msg
@@ -19,9 +23,8 @@ port changeList : String -> Cmd msg
 port listItems : (Encode.Value -> msg) -> Sub msg
 
 
-main : Program Never
 main =
-    Html.App.program
+    Html.App.programWithFlags
         { init = init
         , view = view
         , update = update

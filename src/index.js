@@ -1,3 +1,5 @@
+/* jshint node: true, asi: true */
+/* global firebase, window, document */
 'use strict';
 
 require('./sass/app.sass')
@@ -13,13 +15,16 @@ var database = firebase.database()
 // Embed Elm
 var Elm = require('./Main.elm')
 var mountNode = document.getElementById('main')
-var app = Elm.Main.embed(mountNode)
+var list = window.location.hash.substr(1)
+list = list ? list : 'demo'
+console.log(list)
+var app = Elm.Main.embed(mountNode, { list: list })
 
 // Get values from Firebase
 var listRef = null
 app.ports.changeList.subscribe(function (list) {
     if (listRef) listRef.off()
-    listRef = database.ref('list/' + list + '/')
+    listRef = database.ref('list/' + list + '/items/')
     listRef.on('value', function (snapshot) {
         app.ports.listItems.send(snapshot.val())
     })
