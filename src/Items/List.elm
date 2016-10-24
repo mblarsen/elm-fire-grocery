@@ -152,20 +152,18 @@ commonItemsSection : List Item -> Maybe (List (Html Msg))
 commonItemsSection items =
     Just
         [ h1 [ class "title is-4" ] [ text "Common Items" ]
-        , div [] [ (archivedList items) ]
+        , div [] (archivedList items)
         ]
 
 
-archivedList : List Item -> Html Msg
+archivedList : List Item -> List (Html Msg)
 archivedList items =
-    div [ class "section" ]
-        (items
-            |> List.filter (\i -> i.archived == True)
-            |> List.sortBy .name
-            -- |> List.sortWith sortOrder
-            |>
-                List.map archivedItem
-        )
+    items
+        |> List.filter (\i -> i.archived == True)
+        |> List.sortBy .name
+        -- |> List.sortWith sortOrder
+        |>
+            List.map archivedItem
 
 
 sortOrder : Item -> Item -> Order
@@ -184,7 +182,7 @@ sortOrder a b =
 archivedItem : Item -> Html Msg
 archivedItem item =
     div [ class "Item--archived", onClick (ReuseItem item) ]
-        [ span [ class "icon" ] [ i [ class "fa fa-plus-circle" ] [] ]
+        [ span [ class "icon is-small" ] [ i [ class "fa fa-plus" ] [] ]
         , text (item.name ++ " (" ++ (toString item.used) ++ ")")
         , span [ class "icon is-small remove", onClick (DeleteItem (getItemId item)) ] [ i [ class "fa fa-times" ] [] ]
         ]
