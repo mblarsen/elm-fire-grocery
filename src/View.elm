@@ -1,7 +1,6 @@
 module View exposing (..)
 
 import Html exposing (..)
-import Html.App
 import Html.Attributes exposing (class, placeholder, value)
 import Html.Events exposing (onInput, onClick, on, keyCode)
 import Messages exposing (Msg(..))
@@ -37,7 +36,7 @@ page : Model -> Html Msg
 page model =
     div [ class "container" ]
         [ dontForget model
-        , Html.App.map ItemsMsg (Items.List.view model.items)
+        , Html.map ItemsMsg (Items.List.view model.items)
         ]
 
 

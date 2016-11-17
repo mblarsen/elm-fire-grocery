@@ -133,7 +133,7 @@ activeItem item =
         [ p [ class "control" ]
             [ label [ class "checkbox" ]
                 [ input
-                    [ type' "checkbox"
+                    [ type_ "checkbox"
                     , id (toString item.id)
                     , checked item.done
                     , onCheck (ToggleItem item)

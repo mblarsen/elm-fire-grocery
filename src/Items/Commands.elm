@@ -1,7 +1,7 @@
 port module Items.Commands exposing (..)
 
 import Http exposing (Body)
-import Json.Decode as Decode exposing ((:=))
+import Json.Decode as Decode exposing (field)
 import Json.Encode as Encode
 import Task
 import Items.Models exposing (Item, ItemId)
@@ -30,7 +30,7 @@ receive json =
                 Err err ->
                     []
     in
-        Task.perform identity ItemUpdate (Task.succeed mappedItems)
+        Task.perform ItemUpdate (Task.succeed mappedItems)
 
 
 includeUniqueId : ( String, Item ) -> Item
@@ -40,12 +40,12 @@ includeUniqueId ( uniqueId, item ) =
 
 itemDecoder : Decode.Decoder Item
 itemDecoder =
-    Decode.object5 Item
-        (Decode.maybe ("id" := Decode.string))
-        ("name" := Decode.string)
-        ("done" := Decode.bool)
-        ("archived" := Decode.bool)
-        ("used" := Decode.int)
+    Decode.map5 Item
+        (Decode.maybe (field "id" Decode.string))
+        (field "name" Decode.string)
+        (field "done" Decode.bool)
+        (field "archived" Decode.bool)
+        (field "used" Decode.int)
 
 
 persist : Item -> Cmd Msg

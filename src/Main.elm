@@ -1,6 +1,6 @@
 port module Main exposing (..)
 
-import Html.App
+import Html
 import Messages exposing (Msg(..))
 import Models exposing (Model, initModel)
 import View exposing (view)
@@ -24,7 +24,7 @@ port listItems : (Encode.Value -> msg) -> Sub msg
 
 
 main =
-    Html.App.programWithFlags
+    Html.programWithFlags
         { init = init
         , view = view
         , update = update
