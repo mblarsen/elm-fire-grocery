@@ -24,30 +24,20 @@ Functionality:
 
 ## Install:
 
-    elm-package install
-    npm install
+    yarn
 
 ## Build:
 
-    npm run build
+    yarn build
 
 ## Develop
 
 Be sure to configure your firebase database in `config.js`. Copy
 `config.example.js` to get started.
 
-Then start the webpack dev server:
-
-    npm run dev
+    yarn dev
 
 ## Deploy
 
-Be sure to install `firebase-tools`:
+    yarn deploy
 
-    npm install -g firebase-tools
-
-Then when configured:
-
-    firebase deploy
-
-(be sure `npm run build` has been run first so that `dist` has been created)

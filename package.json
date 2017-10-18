@@ -4,10 +4,9 @@
   "description": "Simple Elm grocery list app with Firebase backend",
   "main": "elm.js",
   "scripts": {
-    "api": "node api.js",
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "dev": "webpack-dev-server --port 3000"
+    "build": "poi build",
+    "dev": "poi",
+    "deploy": "firebase deploy"
   },
   "repository": {
     "type": "git",
@@ -17,19 +16,12 @@
   "license": "MIT",
   "dependencies": {
     "bulma": "^0.2.0",
-    "css-loader": "^0.25.0",
-    "elm-webpack-loader": "^3.0.6",
-    "file-loader": "^0.9.0",
-    "font-awesome": "^4.6.3",
-    "node-sass": "^3.10.0",
-    "sass-loader": "^4.0.2",
-    "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7",
-    "webpack": "^1.13.2",
-    "webpack-dev-middleware": "^1.8.1",
-    "webpack-dev-server": "^1.16.1"
+    "font-awesome": "^4.6.3"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^3.0.1"
+    "node-sass": "^4.5.3",
+    "poi": "^9.3.11",
+    "poi-preset-elm": "^1.1.1",
+    "sass-loader": "^6.0.6"
   }
 }

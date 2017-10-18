@@ -5,9 +5,6 @@
 require('./sass/app.sass')
 require('font-awesome/css/font-awesome.css')
 
-// Require index.html so it gets copied to dist
-require('./index.html')
-
 // Initialize Firebase
 firebase.initializeApp(require('../config.js'))
 var database = firebase.database()
