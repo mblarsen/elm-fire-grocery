@@ -1,8 +1,8 @@
 module Items.Update exposing (update)
 
+import Items.Commands exposing (fbRemove, persist)
 import Items.Messages exposing (Msg(..))
 import Items.Models exposing (Item)
-import Items.Commands exposing (persist, fbRemove)
 
 
 update : Msg -> List Item -> ( List Item, Cmd Msg )
@@ -45,7 +45,7 @@ update msg items =
                 _ =
                     Debug.log "error" err
             in
-                ( items, Cmd.none )
+            ( items, Cmd.none )
 
 
 removeCommand : Item -> Cmd Msg
@@ -69,10 +69,11 @@ archiveCommand items =
 
                     True ->
                         persist { item | archived = True, done = False, used = item.used + 1 }
+
             else
                 Cmd.none
     in
-        List.map commandForItem items
+    List.map commandForItem items
 
 
 unarchiveCommand : Item -> Cmd Msg
@@ -86,12 +87,13 @@ updateItems item items =
         replace existing =
             if existing.id == item.id then
                 item
+
             else
                 existing
     in
-        items
-            |> List.map replace
-            |> addNew item
+    items
+        |> List.map replace
+        |> addNew item
 
 
 addNew : Item -> List Item -> List Item
@@ -102,9 +104,9 @@ addNew item items =
                 |> List.filter (\i -> i.id == item.id)
                 |> List.head
     in
-        case existing of
-            Nothing ->
-                item :: items
+    case existing of
+        Nothing ->
+            item :: items
 
-            _ ->
-                items
+        _ ->
+            items

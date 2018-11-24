@@ -1,13 +1,13 @@
-module View exposing (..)
+module View exposing (dontForget, hero, onEnter, page, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (class, placeholder, value)
-import Html.Events exposing (onInput, onClick, on, keyCode)
-import Messages exposing (Msg(..))
-import Models exposing (Model)
+import Html.Events exposing (keyCode, on, onClick, onInput)
 import Items.List
 import Items.Models exposing (ItemId)
 import Json.Decode as Json
+import Messages exposing (Msg(..))
+import Models exposing (Model)
 
 
 view : Model -> Html Msg
@@ -67,7 +67,8 @@ onEnter msg =
         tagger code =
             if code == 13 then
                 msg
+
             else
                 NoOp
     in
-        on "keydown" (Json.map tagger keyCode)
+    on "keydown" (Json.map tagger keyCode)

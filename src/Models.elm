@@ -1,4 +1,4 @@
-module Models exposing (..)
+module Models exposing (Model, initModel)
 
 import Items.Models exposing (Item)
 

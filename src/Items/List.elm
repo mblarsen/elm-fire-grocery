@@ -1,8 +1,8 @@
-module Items.List exposing (..)
+module Items.List exposing (activeItem, archivedItem, archivedList, clearCompletedButton, commonItemsSection, complete, completeSection, doneShopping, getItemId, incomplete, incompleteSection, isActive, sortOrder, view, wrapListMaybe, wrapMaybe)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick, onCheck, onInput)
+import Html.Events exposing (onCheck, onClick, onInput)
 import Html.Keyed as Keyed
 import Items.Messages exposing (..)
 import Items.Models exposing (Item, ItemId)
@@ -17,12 +17,12 @@ view items =
         wrapListSection =
             wrapListMaybe "section column is-offset-3 is-6"
     in
-        div []
-            [ wrapSection <| incompleteSection items
-            , wrapSection <| completeSection items
-            , wrapListSection <| doneShopping items
-            , wrapListSection <| commonItemsSection items
-            ]
+    div []
+        [ wrapSection <| incompleteSection items
+        , wrapSection <| completeSection items
+        , wrapListSection <| doneShopping items
+        , wrapListSection <| commonItemsSection items
+        ]
 
 
 wrapMaybe : String -> Maybe (Html Msg) -> Html Msg
@@ -49,9 +49,10 @@ doneShopping : List Item -> Maybe (List (Html Msg))
 doneShopping items =
     if items |> isActive |> List.isEmpty then
         Nothing
+
     else
         Just
-            ((clearCompletedButton items)
+            (clearCompletedButton items
                 ++ [ button [ class "button is-link", onClick DoneShopping ] [ text "Clear all" ] ]
             )
 
@@ -101,10 +102,11 @@ incompleteSection items =
         headerNode =
             h1 [ class "title is-4" ] [ text "We need" ]
     in
-        if List.isEmpty itemNodes then
-            Just <| p [] [ text "Add new items or scroll down to add commonly purchased items." ]
-        else
-            Just <| Keyed.node "div" [] (( "", headerNode ) :: itemNodes)
+    if List.isEmpty itemNodes then
+        Just <| p [] [ text "Add new items or scroll down to add commonly purchased items." ]
+
+    else
+        Just <| Keyed.node "div" [] (( "", headerNode ) :: itemNodes)
 
 
 completeSection : List Item -> Maybe (Html Msg)
@@ -119,22 +121,23 @@ completeSection items =
         headerNode =
             h2 [ class "title is-6" ] [ text "Bought" ]
     in
-        if List.isEmpty itemNodes then
-            Nothing
-        else
-            Just <| Keyed.node "div" [] (( "", headerNode ) :: itemNodes)
+    if List.isEmpty itemNodes then
+        Nothing
+
+    else
+        Just <| Keyed.node "div" [] (( "", headerNode ) :: itemNodes)
 
 
 activeItem : Item -> ( String, Html Msg )
 activeItem item =
-    ( (toString item.id)
+    ( getItemId item
     , div
         [ class "Item--active" ]
         [ p [ class "control" ]
             [ label [ class "checkbox" ]
                 [ input
                     [ type_ "checkbox"
-                    , id (toString item.id)
+                    , id (getItemId item)
                     , checked item.done
                     , onCheck (ToggleItem item)
                     ]
@@ -162,8 +165,7 @@ archivedList items =
         |> List.filter (\i -> i.archived == True)
         |> List.sortBy .name
         -- |> List.sortWith sortOrder
-        |>
-            List.map archivedItem
+        |> List.map archivedItem
 
 
 sortOrder : Item -> Item -> Order

@@ -1,4 +1,4 @@
-module Items.Messages exposing (..)
+module Items.Messages exposing (Msg(..))
 
 import Http
 import Items.Models exposing (Item, ItemId)

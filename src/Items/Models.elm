@@ -1,4 +1,4 @@
-module Items.Models exposing (..)
+module Items.Models exposing (Item, ItemId, new)
 
 
 type alias ItemId =

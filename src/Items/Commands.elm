@@ -1,12 +1,12 @@
-port module Items.Commands exposing (..)
+port module Items.Commands exposing (fbPush, fbRemove, includeUniqueId, itemDecoder, itemEncoded, persist, receive)
 
+import Dict
 import Http exposing (Body)
+import Items.Messages exposing (..)
+import Items.Models exposing (Item, ItemId)
 import Json.Decode as Decode exposing (field)
 import Json.Encode as Encode
 import Task
-import Items.Models exposing (Item, ItemId)
-import Items.Messages exposing (..)
-import Dict
 
 
 port fbPush : Item -> Cmd msg
@@ -30,7 +30,7 @@ receive json =
                 Err err ->
                     []
     in
-        Task.perform ItemUpdate (Task.succeed mappedItems)
+    Task.perform ItemUpdate (Task.succeed mappedItems)
 
 
 includeUniqueId : ( String, Item ) -> Item
@@ -64,10 +64,10 @@ itemEncoded item =
                 Nothing ->
                     ""
     in
-        [ ( "id", Encode.string id )
-        , ( "name", Encode.string item.name )
-        , ( "done", Encode.bool item.done )
-        , ( "archived", Encode.bool item.archived )
-        , ( "used", Encode.int item.used )
-        ]
-            |> Encode.object
+    [ ( "id", Encode.string id )
+    , ( "name", Encode.string item.name )
+    , ( "done", Encode.bool item.done )
+    , ( "archived", Encode.bool item.archived )
+    , ( "used", Encode.int item.used )
+    ]
+        |> Encode.object

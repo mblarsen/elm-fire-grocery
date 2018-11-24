@@ -1,11 +1,11 @@
-port module Main exposing (..)
+port module Main exposing (Flags, changeList, init, listItems, main)
 
-import Html
+import Browser
+import Json.Encode as Encode
 import Messages exposing (Msg(..))
 import Models exposing (Model, initModel)
-import View exposing (view)
 import Update exposing (update)
-import Json.Encode as Encode
+import View exposing (view)
 
 
 type alias Flags =
@@ -24,9 +24,9 @@ port listItems : (Encode.Value -> msg) -> Sub msg
 
 
 main =
-    Html.programWithFlags
+    Browser.element
         { init = init
         , view = view
         , update = update
-        , subscriptions = (\_ -> listItems GotListItems)
+        , subscriptions = \_ -> listItems GotListItems
         }
