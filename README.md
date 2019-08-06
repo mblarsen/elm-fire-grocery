@@ -1,3 +1,5 @@
+# DEPRECATED: This is no longer maintained and will not be updated from 0.18
+
 # Simple Grocery List in Elm and Firebase
 
 This is a tiny project with the sole purpose of learning Elm.
